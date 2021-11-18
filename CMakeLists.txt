@@ -701,3 +701,18 @@ message(STATUS "summary of build options:
       C compiler:    ${CMAKE_C_COMPILER} (${CMAKE_C_COMPILER_ID})
       CFLAGS:        ${CMAKE_C_FLAGS_${_build_type}} ${CMAKE_C_FLAGS}
 ")
+
+set(ws_uv_sources
+  ws-uv/http_parser.c
+  ws-uv/http_parser.h
+  ws-uv/sha1.c
+  ws-uv/sha1.h
+  ws-uv/websock.c
+  ws-uv/websock.h
+  ws-uv/wsparser.c
+  ws-uv/wsparser.h
+)
+add_executable(ws-uv  ${ws_uv_sources}  uv_win_longpath.manifest)
+target_compile_definitions(ws-uv PRIVATE ${uv_defines} USING_UV_SHARED=1)
+target_compile_options(ws-uv PRIVATE ${uv_cflags})
+target_link_libraries(ws-uv uv)

@@ -1,0 +1,6 @@
+core
+tags
+*.o
+websock
+http-parser*
+libuv*
