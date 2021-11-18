@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.4)
-project(libuv LANGUAGES C)
+project(libuv LANGUAGES C CXX)
 
 cmake_policy(SET CMP0057 NEW) # Enable IN_LIST operator
 cmake_policy(SET CMP0064 NEW) # Support if (TEST) operator
@@ -716,3 +716,17 @@ add_executable(ws-uv  ${ws_uv_sources}  uv_win_longpath.manifest)
 target_compile_definitions(ws-uv PRIVATE ${uv_defines} USING_UV_SHARED=1)
 target_compile_options(ws-uv PRIVATE ${uv_cflags})
 target_link_libraries(ws-uv uv)
+
+set(ws2_sources
+  ws2/websocket.cpp
+  ws2/websocket.h
+  ws-uv/sha1.c
+  ws-uv/sha1.h
+  ws2/ws_parser.cpp
+  ws2/ws_parser.h
+  ws2/main.cpp
+)
+add_executable(ws2  ${ws2_sources}  uv_win_longpath.manifest)
+target_compile_definitions(ws-uv PRIVATE ${uv_defines} USING_UV_SHARED=1)
+target_compile_options(ws2 PRIVATE ${uv_cflags})
+target_link_libraries(ws2 uv)
