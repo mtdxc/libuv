@@ -727,6 +727,19 @@ set(ws2_sources
   ws2/main.cpp
 )
 add_executable(ws2  ${ws2_sources}  uv_win_longpath.manifest)
-target_compile_definitions(ws-uv PRIVATE ${uv_defines} USING_UV_SHARED=1)
+target_compile_definitions(ws2 PRIVATE ${uv_defines} USING_UV_SHARED=1)
 target_compile_options(ws2 PRIVATE ${uv_cflags})
 target_link_libraries(ws2 uv)
+
+
+set(tinyweb_sources
+  tinyweb/tools.c
+  tinyweb/tools.h
+  tinyweb/tinyweb.c
+  tinyweb/tinyweb.h
+  tinyweb/main.c
+)
+add_executable(tinyweb  ${tinyweb_sources}  uv_win_longpath.manifest)
+target_compile_definitions(tinyweb PRIVATE ${uv_defines} USING_UV_SHARED=1)
+target_compile_options(tinyweb PRIVATE ${uv_cflags})
+target_link_libraries(tinyweb uv)
