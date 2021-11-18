@@ -711,6 +711,10 @@ set(ws_uv_sources
   ws-uv/websock.h
   ws-uv/wsparser.c
   ws-uv/wsparser.h
+  ws-uv/url.cpp
+  ws-uv/url.hpp
+  ws-uv/websocket.cpp
+  ws-uv/websocket.hpp
 )
 add_executable(ws-uv  ${ws_uv_sources}  uv_win_longpath.manifest)
 target_compile_definitions(ws-uv PRIVATE ${uv_defines} USING_UV_SHARED=1)
