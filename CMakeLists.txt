@@ -3,6 +3,11 @@ project(libuv LANGUAGES C CXX)
 
 cmake_policy(SET CMP0057 NEW) # Enable IN_LIST operator
 cmake_policy(SET CMP0064 NEW) # Support if (TEST) operator
+if(POLICY CMP0091)
+  cmake_policy(SET CMP0091 NEW) # Enable MSVC_RUNTIME_LIBRARY setting
+endif()
+
+project(libuv LANGUAGES C)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
@@ -220,7 +225,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Android")
        src/unix/linux-inotify.c
        src/unix/linux-syscalls.c
        src/unix/procfs-exepath.c
-       src/unix/pthread-fixes.c
        src/unix/random-getentropy.c
        src/unix/random-getrandom.c
        src/unix/random-sysctl-linux.c
@@ -316,7 +320,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "OS390")
   list(APPEND uv_defines _XOPEN_SOURCE=600)
   list(APPEND uv_defines _XOPEN_SOURCE_EXTENDED)
   list(APPEND uv_sources
-       src/unix/pthread-fixes.c
        src/unix/os390.c
        src/unix/os390-syscalls.c
        src/unix/os390-proctitle.c)
@@ -464,7 +467,6 @@ if(LIBUV_BUILD_TESTS)
        test/test-async-null-cb.c
        test/test-async.c
        test/test-barrier.c
-       test/test-callback-order.c
        test/test-callback-stack.c
        test/test-close-fd.c
        test/test-close-order.c
